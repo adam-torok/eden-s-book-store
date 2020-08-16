@@ -4,7 +4,8 @@
     <div class="text-center">
       <h2 class="text-lg">{{this.author.name}}</h2>
       <div class="text-orange-500">Description: {{this.author.description}}</div>
-     <div class="text-gray-600">Genre : {{this.author.rating}}</div>
+            <div class="text-orange-500">Rating: {{this.author.rating}}</div>
+     <div class="text-gray-600">Genres : {{this.author.genre}}</div>
     </div>
  </div>
 </template>
