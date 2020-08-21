@@ -2,10 +2,10 @@
 <div class="flex mx-auto items-center justify-center shadow-lg mt-5 mx-8 mb-4 max-w-lg">
    <form class="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
       <div class="flex flex-wrap -mx-3 mb-6">
-         <h2 class="px-4 pt-3 pb-2 text-gray-800 text-lg">Add a new comment</h2>
-         <input v-model="comment.name" type="text" placeholder="Your name">
-         <input v-model="comment.email" type="text" placeholder="Your E-mail">
-         <input v-model="comment.picture" type="text" placeholder="Your pic url">
+         <h2 class="px-4 pt-3 pb-2 text-gray-800 text-lg">Add a new review 😄</h2>
+         <input class="rounded border border-gray-400 leading-normal resize-none w-full h-10 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white w-full md:w-full px-3 mb-2 mt-2" v-model="comment.name" type="text" placeholder="Your name">
+         <input class="rounded border border-gray-400 leading-normal resize-none w-full h-10 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white w-full md:w-full px-3 mb-2 mt-2" v-model="comment.email" type="text" placeholder="Your E-mail">
+         <input class="rounded border border-gray-400 leading-normal resize-none w-full h-10 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white w-full md:w-full px-3 mb-2 mt-2" v-model="comment.picture" type="text" placeholder="Your pic url">
          <div class="w-full md:w-full px-3 mb-2 mt-2">
             <textarea v-model="comment.comment" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="body" placeholder='Type Your Comment' required></textarea>
          </div>
@@ -21,35 +21,37 @@
             </div>
          </div>
       </div>
-      {{comment}}
       </form>
    </div>
 </template>
 
 <script>
 export default {
-   props:['addComment'],
+   props:['bookId','addComment'],
    methods:{
       onAddComment(){
          this.addComment(this.comment);
          this.comment  = {
+            id: this.comment.id,
             name : '',
             email:'',
             picture : '',
             comment: ''
          }
+         location.reload();
       }
    },
   data(){
      return{
          comment: {
+            id: this.$route.params.id,
             name:'',
             email:'',
             picture : '',
             comment: '',
          }
      }
-  }
+  },
 }
 </script>
 

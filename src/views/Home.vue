@@ -29,6 +29,7 @@ export default {
     data(){
       return{
         'books' : [],
+        'news' : [],
         'search' :'', //TODO - Implementing an easy search option
         alert: false
       }

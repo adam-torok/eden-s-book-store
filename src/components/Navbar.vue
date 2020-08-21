@@ -32,6 +32,7 @@
                     <router-link @click.native="isOpen = !isOpen" class="mt-3 text-gray-800 hover:underline sm:mx-3 sm:mt-0" to="/Home">Home</router-link>
                     <router-link @click.native="isOpen = !isOpen" class="mt-3 text-gray-800 hover:underline sm:mx-3 sm:mt-0" to="/Authors">Authors</router-link>
                     <router-link @click.native="isOpen = !isOpen" class="mt-3 text-gray-800 hover:underline sm:mx-3 sm:mt-0" to="/Insert/">Add New Book!</router-link>
+                    <router-link @click.native="isOpen = !isOpen" class="mt-3 text-gray-800 hover:underline sm:mx-3 sm:mt-0" to="/News">News About Books!</router-link>
                 </div>
             </nav>
             

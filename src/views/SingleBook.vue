@@ -1,5 +1,5 @@
 <template>
-<section class="container m-auto my-10 py-5 text-gray-700 body-font overflow-hidden bg-white">
+<section class="book__container container m-auto my-10 py-5 text-gray-700 body-font overflow-hidden bg-white">
   <div class="container px-5 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
       <img alt="ecommerce" class="lg:w-1/3 w-full object-cover object-center rounded border border-gray-200" :src="this.book.cover">
@@ -9,6 +9,16 @@
         <h2 class="text-xs title-font text-gray-500 tracking-widest">{{this.book.time}}</h2>
         <div class="flex mb-4">
           <span class="flex items-center">
+            <span v-for="rating in parseInt(this.book.rating)" :key="rating.id">
+              <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-orange-500" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+           </span>     
+            <span v-for="rating in 5 - parseInt(this.book.rating)" :key="rating.id">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+           </span>          
             <span class="text-gray-600 ml-3">{{this.book.rating}} Rating</span>
           </span>
           <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
@@ -28,9 +38,20 @@
       </div>
     </div>
   </div>
-  {{comments}}
-  <comment-writer :addComment="addComment"></comment-writer>
-  <comment :commentData="comment" v-for="comment in comments" v-bind:key="comment.id"></comment>
+  <button @click="showComments = !showComments" class="book__comment-button text-white bg-orange-500 border-0 py-2 px-3 focus:outline-none hover:bg-orange-600 rounded">Show reviews</button>
+  <div class="book__comment-container">
+    <transition  name="custom-classes-transition"
+    enter-active-class="animated fadeIn"
+    leave-active-class="animated fadeOut">
+    <div v-show="showComments">
+      <comment-writer :bookId="this.book.id" :addComment="addComment"></comment-writer>
+      <div v-if="hasComments">
+        <comment :commentData="comment" v-for="comment in comments" v-bind:key="comment.id"></comment>
+      </div>
+      <div v-else>Sajnos nincs komment még!</div>
+    </div>
+    </transition>
+  </div>
 </section>
 
 </template>
@@ -46,37 +67,40 @@ export default {
     },
     data(){
         return{
+            hasComments : false,
+            showComments : false,
             book:{},
-            comments: [{
-              name:'Adam',
-              email : 'asd@asd.hu',
-              date : '2020. 05. 10',
-              picture: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-              comment : 'Jaj nagyon jó volt ez a könyv esküszöm!'
-            },
-            {
-              name:'Péter',
-              email : 'asd@asd.hu',
-              date : '2020. 05. 10',
-              picture: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTna-cdkVT6Jcx_77l9CVYRwmQEByZOoItU6w&usqp=CAU',
-              comment : 'Jaj Beszarsz!'
-            }]
+            comments: []
         }
     },
     methods:{
-      addComment(comment){
-        this.comments.push(comment);
+      async addComment(comment){
+        await API.addComment(comment);
       }
     },
     beforeMount(){
     window.scrollTo(0,0);
     },
     async mounted(){
-       this.book = await API.fetchBook(this.$route.params.id);
+      this.comments = await API.fetchComments(this.$route.params.id)
+      this.book = await API.fetchBook(this.$route.params.id);
+      if(this.comments.length > 0){
+        this.hasComments = true;
+      }
     }
 }
 </script>
 
 <style>
-
+  .book__container{
+    display:flex;
+    flex-direction: column;
+  }
+  .book__comment-container{
+    display:grid;
+    justify-content:center;
+  }
+  .book__comment-button{
+    margin: auto;
+  }
 </style>

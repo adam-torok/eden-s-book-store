@@ -37,7 +37,7 @@
         </div>
         <p class="text-xs">{{this.book.desc | substringify}}</p>
         <div class="flex  mt-5">
-          <router-link class="flex text-white bg-orange-500 border-0 py-2 px-3 focus:outline-none hover:bg-orange-600 rounded" :to="{ name: 'bookid', params: { id: this.book.id }}">Review</router-link>
+          <router-link class="flex text-white bg-orange-500 border-0 py-2 px-3 focus:outline-none hover:bg-orange-600 rounded" :to="{ name: 'bookid', params: { id: this.book.id }}">More</router-link>
           <button @click="deleteBook(id)" class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
             <i class="fas fa-trash"></i>
           </button>
