@@ -10,6 +10,4 @@ export default[
     {path: '/Insert', component : InsertBook},
     {path: '/Update/:id',name: 'updateBook', component : UpdateBook},
     {path: '/Authors/',name: 'Authors', component : Author}
-
-
 ]  

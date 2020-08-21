@@ -28,17 +28,45 @@
       </div>
     </div>
   </div>
+  {{comments}}
+  <comment-writer :addComment="addComment"></comment-writer>
+  <comment :commentData="comment" v-for="comment in comments" v-bind:key="comment.id"></comment>
 </section>
 
 </template>
 
 <script>
 import API from '@/api/api'
+import CommentWriter from '@/components/CommentWriter'
+import Comment from '@/components/Comment'
 export default {
+    components:{
+      'comment-writer' : CommentWriter,
+      'comment' : Comment
+    },
     data(){
         return{
-            book:{}
+            book:{},
+            comments: [{
+              name:'Adam',
+              email : 'asd@asd.hu',
+              date : '2020. 05. 10',
+              picture: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+              comment : 'Jaj nagyon jó volt ez a könyv esküszöm!'
+            },
+            {
+              name:'Péter',
+              email : 'asd@asd.hu',
+              date : '2020. 05. 10',
+              picture: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTna-cdkVT6Jcx_77l9CVYRwmQEByZOoItU6w&usqp=CAU',
+              comment : 'Jaj Beszarsz!'
+            }]
         }
+    },
+    methods:{
+      addComment(comment){
+        this.comments.push(comment);
+      }
     },
     beforeMount(){
     window.scrollTo(0,0);
