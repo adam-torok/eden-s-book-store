@@ -2,8 +2,9 @@
 <section class="py-5 text-gray-700 body-font overflow-hidden bg-white rounded">
   <div class="container px-5 mx-auto">
     <div class="mx-auto flex flex-wrap">
-      <img alt="ecommerce" class="lg:w-1/3 w-full object-cover object-center rounded border border-gray-200" :src="this.book.cover">
-      <div class="lg:w-1/2 w-full lg:pl-5 lg:py-6 mt-6 lg:mt-0">
+      <img alt="Book cover" class="lg:w-1/3 w-full object-cover object-center rounded border border-gray-200" :src="this.book.cover">
+      <div class="book__desc lg:w-1/2 w-full lg:pl-5 lg:py-6 mt-6 lg:mt-0">
+      <div class="ribbon ribbon-top-right"><span>TOP 10</span></div>
         <h2 class="text-sm title-font text-gray-500 tracking-widest">{{this.book.author}}</h2>
         <h1 class="text-gray-900 title-font font-medium mb-1">{{this.book.title}}</h1>
           <h2 class="text-xs title-font text-gray-500 tracking-widest">{{this.book.genre}}</h2>
@@ -22,18 +23,7 @@
            </span>          
             <span class="book__review text-gray-600 text-xs ml-2">{{this.book.rating}} Rating</span>
           </span>
-          <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
-            <a class="text-gray-500">
-              <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-              </svg>
-            </a>
-            <a class="ml-2 text-gray-500">
-              <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-              </svg>
-            </a>
-          </span>
+          
         </div>
         <p class="text-xs">{{this.book.desc | substringify}}</p>
         <div class="flex  mt-5">
@@ -75,6 +65,62 @@ export default {
 </script>
 
 <style scoped>
+
+.book__desc{
+  position: relative;
+}
+
+.ribbon {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+}
+.ribbon::before,
+.ribbon::after {
+  position: absolute;
+  z-index: 0;
+  content: '';
+  display: block;
+  border: 5px solid orange;
+}
+.ribbon span {
+  position: absolute;
+  display: block;
+  width: 225px;
+  padding: 15px 0;
+  background-color: orange;
+  box-shadow: 0 5px 10px rgba(0,0,0,.1);
+  color: #fff;
+  font: 700 18px/1 'Lato', sans-serif;
+  text-shadow: 0 1px 1px rgba(0,0,0,.2);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.ribbon-top-right {
+  top: -10px;
+  right: -10px;
+}
+.ribbon-top-right::before,
+.ribbon-top-right::after {
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+.ribbon-top-right::before {
+  top: 0;
+  left: 0;
+}
+.ribbon-top-right::after {
+  bottom: 0;
+  right: 0;
+}
+.ribbon-top-right span {
+  left: -25px;
+  top: 30px;
+  transform: rotate(45deg);
+}
+
 .book__review {
   width:70px;
 }

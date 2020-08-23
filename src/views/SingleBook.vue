@@ -1,8 +1,9 @@
 <template>
 <section class="book__container container m-auto my-10 py-5 text-gray-700 body-font overflow-hidden bg-white">
+  <side-note></side-note>
   <div class="container px-5 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
-      <img alt="ecommerce" class="lg:w-1/3 w-full object-cover object-center rounded border border-gray-200" :src="this.book.cover">
+      <img alt="Book cover" class="lg:w-1/3 w-full object-cover object-center rounded border border-gray-200" :src="this.book.cover">
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
         <h2 class="text-sm title-font text-gray-500 tracking-widest">{{this.book.author}}</h2>
         <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{this.book.title}}</h1>
@@ -58,10 +59,12 @@
 
 <script>
 import API from '@/api/api'
+import SideNote from '@/components/SideNote'
 import CommentWriter from '@/components/CommentWriter'
 import Comment from '@/components/Comment'
 export default {
     components:{
+      'side-note' : SideNote,
       'comment-writer' : CommentWriter,
       'comment' : Comment
     },

@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-white py-8 w-full ">
+  <section class="footer__container bg-white py-8 w-full ">
     <div class="container mx-auto px-8">
         <div class="table w-full">
             <div class="block sm:table-cell">
@@ -67,5 +67,9 @@ export default {
 </script>
 
 <style>
-
+.footer__container{
+    background-image: url(/img/reading-cat.cfcfea67.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: contain;}
 </style>

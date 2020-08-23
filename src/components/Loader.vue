@@ -1,6 +1,6 @@
 <template>
   <div class="loader">
-    <img src="../storage/asd.gif" alt="">
+    <img class="animated heartBeat infinite" src="../storage/pc-cat.png" alt="">
     <br>
     <h1 class="title-font text-gray-500">{{facts[Math.floor(Math.random() * facts.length)]}}</h1>
   </div>
@@ -46,11 +46,11 @@ export default {
   right: 0;
 }
 .loader>img{
-  height:450px;
+  height:350px;
 }
 .loader>h1{
   color: orange;
-  margin-top: -100px;
+  margin-top: -50px;
 }
 @media only screen and (max-width: 600px) {
   .loader>h1{

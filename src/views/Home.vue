@@ -1,10 +1,6 @@
 <template>
   <div>
-    <div class="cat__tounge">
-      <i class="text-orange-500 fab fa-facebook-f"></i>
-      <i class="text-orange-500  fab fa-twitter"></i>
-      <img src="../storage/logo.png" alt="" srcset="">
-    </div>
+    <side-note></side-note>
     <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">   
       <loader v-show="loader"></loader>
     </transition>
@@ -30,10 +26,12 @@
 <script>
 import API from '@/api/api'
 import Loader from '@/components/Loader'
+import SideNote from '@/components/SideNote'
 import Alert from '@/components/Alert'
 import Book from '@/components/Book.vue'
 export default {
     components:{
+        'side-note' : SideNote,
         'loader' : Loader,
         'book' : Book,
         'alert' : Alert
@@ -76,35 +74,6 @@ export default {
 html{
 font-family: "DINNextRoundedLTPro-Regular";
 }
-
-.cat__tounge{
-  display: flex;
-  align-items: center;
-  position: fixed;
-  background: white;
-  border-radius: 10px;
-  left: -145px;
-  padding-left: 20px;
-  width: 190px;
-  cursor: pointer;
-  height: 95px;
-  transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
-.cat__tounge>i{
-  margin: 0 5px;
-}
-
-.cat__tounge>img{
-  width: 150px;
-}
-
-.cat__tounge:hover{
-  left: -0;
-  box-shadow: 0 0 25px 0 rgba(0,0,0,.04);
-  transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
 .books__container{
   margin: 20px auto;
   display: grid;

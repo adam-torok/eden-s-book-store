@@ -3,6 +3,7 @@
   <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">   
       <loader v-show="loader"></loader>
   </transition>
+  <side-note></side-note>
   <transition 
   name="animated fadeIn"
   enter-active-class="animated fadeIn"
@@ -17,9 +18,11 @@
 import NewBookForm from '@/components/NewBookForm'
 import Loader from '@/components/Loader'
 import Alert from '@/components/Alert'
+import SideNote from '@/components/SideNote'
 import API from '@/api/api'
 export default {
     components:{
+        'side-note' : SideNote,
         'book-form' : NewBookForm,
         'alert' : Alert,
         'loader' : Loader,
