@@ -53,8 +53,9 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
 html{
-  font-family: 'Pangolin', cursive;
+
 }
 .books__container{
   margin: 20px auto;

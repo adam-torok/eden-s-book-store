@@ -7,11 +7,17 @@ const API_UPDATE_BOOK = API_URL+'edenbook/update/';
 const APU_READ_ALL_AUTHORS = API_URL+'edenbook/authors/';
 const API_READ_COMMENTS = API_URL+'edenbook/readcomments/';
 const API_ADD_COMMENTS = API_URL+'edenbook/addcomment/';
-const API_NEWS = "https://newsapi.org/v2/everything?q=book&from=2020-08-20&to=2020-08-20&sortBy=popularity&apiKey=eed39cf371d04783aa85d8f258030d56"
+const API_NEWS = "https://newsapi.org/v2/everything?q=book&from=2020-08-20&to=2020-08-20&sortBy=popularity&apiKey=eed39cf371d04783aa85d8f258030d56";
+const API_FRESH_NEWS = "https://newsapi.org/v2/top-headlines?country=us&apiKey=eed39cf371d04783aa85d8f258030d56"
+const API_WEATHER = "http://api.openweathermap.org/data/2.5/weather?lang=en&units=metric&zip=6725,hu&appid=53a8a64a78d4bc026804722d8a88eb29";
 
 export default{    
     async fetchNews(){
       const res = await fetch(API_NEWS);
+      return res.json();
+    },
+    async fetchFreshNews(){
+      const res = await fetch(API_FRESH_NEWS);
       return res.json();
     },
     async fetchBooks() {
@@ -69,5 +75,9 @@ export default{
       console.log(res);
       return res.json();
     },
+    async fetchWeather(){
+      const res = await fetch(API_WEATHER);
+      return res.json();
+    }
 }
     

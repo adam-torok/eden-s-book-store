@@ -1,9 +1,9 @@
 <template>
-  <section class="bg-white py-8 w-full">
+  <section class="bg-white py-8 w-full ">
     <div class="container mx-auto px-8">
         <div class="table w-full">
             <div class="block sm:table-cell">
-                <p class="uppercase text-grey text-sm sm:mb-6">Links</p>
+                <p class="uppercase text-grey  dark:bg-red text-sm sm:mb-6">Links</p>
                 <ul class="list-reset text-xs mb-6">
                     <li class="mt-2 inline-block mr-2 sm:block sm:mr-0">
                         <a href="#" class="text-grey hover:text-grey-dark">FAQ</a>

@@ -48,7 +48,7 @@
       <div v-if="hasComments">
         <comment :commentData="comment" v-for="comment in comments" v-bind:key="comment.id"></comment>
       </div>
-      <div v-else>Sajnos nincs komment még!</div>
+      <div v-else>Noone commented on this book yet 😕</div>
     </div>
     </transition>
   </div>
