@@ -49,12 +49,13 @@ export default {
   height:450px;
 }
 .loader>h1{
+  color: orange;
   margin-top: -100px;
 }
 @media only screen and (max-width: 600px) {
   .loader>h1{
   margin-top: -70px;
-  max-width: 300px;
+  max-width: 350px;
   }
 
 .loader>img{

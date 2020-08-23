@@ -1,5 +1,8 @@
 <template>
 <div>
+  <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">   
+      <loader v-show="loader"></loader>
+  </transition>
   <transition 
   name="animated fadeIn"
   enter-active-class="animated fadeIn"
@@ -12,17 +15,25 @@
 
 <script>
 import NewBookForm from '@/components/NewBookForm'
+import Loader from '@/components/Loader'
 import Alert from '@/components/Alert'
 import API from '@/api/api'
 export default {
     components:{
         'book-form' : NewBookForm,
-        'alert' : Alert
+        'alert' : Alert,
+        'loader' : Loader,
     },
     data(){
       return{
+        loader:true,
         alert:false
       }
+    },
+    created(){
+       setTimeout(() => {
+        this.loader = !this.loader;
+      }, 2000);
     },
     methods:{
         insertNewBook(book) {

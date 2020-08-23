@@ -1,9 +1,11 @@
 <template>
     <section class="news">
+        <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">   
+            <loader v-show="loader"></loader>
+        </transition>
         <div class="news__container">
             <news v-for="article in this.news.articles" :key="article.id" :isHot="false" :article="article"></news>
         </div>
-
         <div class="news__container-fresh">
             <news v-for="article in this.freshNews.articles" :key="article.id" :isHot="true" :article="article"></news>
         </div>
@@ -13,9 +15,17 @@
 <script>
 import API from '@/api/api'
 import News from '@/components/SingleNews'
+import Loader from '@/components/Loader'
+
 export default {
     components:{
         'news' : News,
+        'loader' : Loader,
+    },
+     created(){
+       setTimeout(() => {
+        this.loader = !this.loader;
+      }, 2000);
     },
     async mounted(){
      this.news = await API.fetchNews();
@@ -23,6 +33,7 @@ export default {
     },
     data(){
         return{
+            loader:true,
             news:{},
             freshNews : {}
         }
