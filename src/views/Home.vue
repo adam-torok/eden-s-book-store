@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div class="cat__tounge">
+      <i class="text-orange-500 fab fa-facebook-f"></i>
+      <i class="text-orange-500  fab fa-twitter"></i>
+      <img src="../storage/logo.png" alt="" srcset="">
+    </div>
     <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">   
       <loader v-show="loader"></loader>
     </transition>
@@ -12,10 +17,12 @@
     </span>
     <input v-model="search" class="w-full border my-5 rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline" type="text" placeholder="Search books">
     </div>
+    <div>
     <div class="books__container container m-auto">
       <div  v-for="book in books" :key="book.id">
         <book :deleteBook="deleteBook" :book="book"></book>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -68,6 +75,34 @@ export default {
 
 html{
 font-family: "DINNextRoundedLTPro-Regular";
+}
+
+.cat__tounge{
+  display: flex;
+  align-items: center;
+  position: fixed;
+  background: white;
+  border-radius: 10px;
+  left: -145px;
+  padding-left: 20px;
+  width: 190px;
+  cursor: pointer;
+  height: 95px;
+  transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.cat__tounge>i{
+  margin: 0 5px;
+}
+
+.cat__tounge>img{
+  width: 150px;
+}
+
+.cat__tounge:hover{
+  left: -0;
+  box-shadow: 0 0 25px 0 rgba(0,0,0,.04);
+  transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .books__container{
