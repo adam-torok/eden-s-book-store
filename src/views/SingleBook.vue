@@ -101,6 +101,7 @@ export default {
   }
   .book__comment-container{
     display:grid;
+    padding: 20px;
     justify-content:center;
   }
   .book__comment-button{

@@ -4,9 +4,9 @@
     <div class="mx-auto flex flex-wrap">
       <img alt="Book cover" class="lg:w-1/3 w-full object-cover object-center rounded border border-gray-200" :src="this.book.cover">
       <div class="book__desc lg:w-1/2 w-full lg:pl-5 lg:py-6 mt-6 lg:mt-0">
-      <div class="ribbon ribbon-top-right"><span>TOP 10</span></div>
+      <div class="ribbon ribbon-top-right"><span>RATED {{this.book.rating}}</span></div>
         <h2 class="text-sm title-font text-gray-500 tracking-widest">{{this.book.author}}</h2>
-        <h1 class="text-gray-900 title-font font-medium mb-1">{{this.book.title}}</h1>
+        <h1 class="book__title text-gray-900 title-font font-medium mb-1">{{this.book.title}}</h1>
           <h2 class="text-xs title-font text-gray-500 tracking-widest">{{this.book.genre}}</h2>
         <h2 class="text-xs title-font text-gray-500 tracking-widest">{{this.book.time | dateCutter('-','.')}}</h2>
         <div class="flex">
@@ -123,5 +123,11 @@ export default {
 
 .book__review {
   width:70px;
+}
+
+@media only screen and (max-width: 600px) {
+.book__title{
+  max-width: 70%;
+  }
 }
 </style>

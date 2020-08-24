@@ -36,6 +36,7 @@ export default {
   align-content: center;
   z-index: 999;
   height: 100vh;
+  text-align: center;
   width: auto;
   overflow: show;
   align-items: center;
@@ -54,7 +55,8 @@ export default {
 }
 @media only screen and (max-width: 600px) {
   .loader>h1{
-  margin-top: -70px;
+  margin-top: -50px;
+  font-weight: 900;
   max-width: 350px;
   }
 

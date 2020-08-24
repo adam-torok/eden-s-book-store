@@ -1,6 +1,7 @@
 const API_URL = 'http://localhost:9999/';
 const API_READ_ALL = API_URL+'edenbook/';
 const API_READ_BOOK = API_URL+'edenbook/book/';
+const API_READ_BOOK_NAME = API_URL+'edenbook/fetchbookvianame.php?title=';
 const API_INSERT_BOOK = API_URL+'edenbook/insert/';
 const API_DELETE_BOOK = API_URL+'edenbook/delete/';
 const API_UPDATE_BOOK = API_URL+'edenbook/update/';
@@ -28,9 +29,11 @@ export default{
         const res = await fetch(API_READ_BOOK+id);  
         return res.json();
     },
-    async addComment(comment){
-      console.log(comment);
-      
+    async fetchBookViaName(title){
+      const res = await fetch(API_READ_BOOK_NAME+title);  
+      return res.json();
+    },
+    async addComment(comment){      
       await fetch(
         API_ADD_COMMENTS,
         {
@@ -72,7 +75,6 @@ export default{
     },
     async fetchAuthors() {
       const res = await fetch(APU_READ_ALL_AUTHORS);
-      console.log(res);
       return res.json();
     },
     async fetchWeather(){

@@ -71,5 +71,11 @@ export default {
     background-image: url(/img/reading-cat.cfcfea67.png);
     background-position: right;
     background-repeat: no-repeat;
-    background-size: contain;}
+    background-size: contain;
+}
+@media only screen and (max-width: 600px) {
+.footer__container{
+    background-size: inherit;
+    }
+}
 </style>

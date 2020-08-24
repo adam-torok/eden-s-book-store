@@ -11,7 +11,7 @@
           <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </span>
-    <input v-model="search" class="w-full border my-5 rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline" type="text" placeholder="Search books">
+    <input @keyup="searchBook" v-model="search" class="w-full border my-5 rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline" type="text" placeholder="Search books">
     </div>
     <div>
     <div class="books__container container m-auto">
@@ -30,6 +30,7 @@ import SideNote from '@/components/SideNote'
 import Alert from '@/components/Alert'
 import Book from '@/components/Book.vue'
 export default {
+  
     components:{
         'side-note' : SideNote,
         'loader' : Loader,
@@ -39,7 +40,7 @@ export default {
     data(){
       return{
         loader : true,
-        'books' : [],
+        'books' : {},
         'news' : [],
         'search' :'', //TODO - Implementing an easy search option
         alert: false
@@ -54,7 +55,10 @@ export default {
       }, 2000);
     },
     methods:{
-      deleteBook(id){
+        async searchBook(){
+          this.books = await API.fetchBookViaName(this.search);
+        },
+        deleteBook(id){
         API.deleteBook(id).then(() =>{
             this.alert = true;
             setTimeout(() => {
@@ -62,9 +66,9 @@ export default {
             }, 2000);
             location.reload();
         });   
-      }
+      },
     }
-}
+  }
 </script>
 
 <style>
