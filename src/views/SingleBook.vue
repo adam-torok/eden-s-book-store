@@ -49,7 +49,10 @@
       <div v-if="hasComments">
         <comment :commentData="comment" v-for="comment in comments" v-bind:key="comment.id"></comment>
       </div>
-      <div v-else>Noone commented on this book yet 😕</div>
+      <div class="book_comment-no" v-else>
+        <img class="book_comment-image" src="../storage/notfound.png" alt="">
+        <p class="text-center text-gray-900  title-font font-medium mb-1">Noone commented on this book yet 😕</p>
+      </div>
     </div>
     </transition>
   </div>
@@ -106,5 +109,14 @@ export default {
   }
   .book__comment-button{
     margin: auto;
+  }
+  .book_comment-image{
+    width:350px;
+  }
+  .book_comment-no{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
   }
 </style>

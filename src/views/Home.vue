@@ -33,6 +33,7 @@ import SideNote from '@/components/SideNote'
 import Alert from '@/components/Alert'
 import Book from '@/components/Book.vue'
 export default {
+  props:['isLogged'],
   components:{
     'scroller' : Scroller,
     'side-note' : SideNote,
@@ -56,6 +57,9 @@ export default {
     this.books = await API.fetchBooks();     
   },
   created(){
+    if(!this.isLogged){
+      this.$router.replace({ name: "Login" });      
+    }
     setTimeout(() => {
     this.selectedQuote = this.quote[[Math.floor(Math.random() * this.quote.length)]].quote;
     this.selectedQuoteAuthor = this.quote[[Math.floor(Math.random() * this.quote.length)]].source;
@@ -63,7 +67,6 @@ export default {
     }, 2000);
   },
   async beforeCreate(){
-    console.log("fetching");
     this.quote = await API.fetchQuote();
   },
   methods:{

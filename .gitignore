@@ -20,3 +20,7 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+src/firebase.js
+.gitignore
+package-lock.json
+package.json

@@ -1,6 +1,6 @@
 <template>
    <header>
-        <div class="container mx-auto px-6 py-3">
+        <div v-if="isLogged == true" class="container mx-auto px-6 py-3">
             <div class="flex items-center justify-between">
                 <div class="hidden w-full text-gray-800 md:flex md:items-center">
                     <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -8,13 +8,14 @@
                     </svg>
                     <span class="mx-1 text-sm">Szeged</span>
                 <i class="text-orange-500 fas mx-1 cursor-pointer fa-sun fa-md"></i>
-               | {{this.weather.weather[0].description}} | 
-                {{this.weather.main.temp}} °C
+                   | {{this.weather.weather[0].description}} | 
+                    {{this.weather.main.temp}} °C
                 </div>
                 <div class="w-full text-gray-800 md:text-center text-m font-semibold">
-                    Eden's Book Store
+                    Eden's Book Store 
                 </div>
                 <div class="flex items-center justify-end w-full">
+                <i @click="logOut()"  class="fas fa-1x text-orange-500 fa-sign-out-alt"></i>
                     <div class="flex sm:hidden">
                         <button @click="isOpen = !isOpen" type="button" class="text-gray-800-600 hover:text-gray-800-500 focus:outline-none focus:text-gray-800-500" aria-label="toggle menu">
                             <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
@@ -24,13 +25,35 @@
                     </div>
                 </div>
             </div>
-     
             <nav :class="isOpen ? '' : 'hidden'" class="sm:flex sm:justify-center sm:items-center mt-4">
                 <div class="flex flex-col sm:flex-row">
                     <router-link @click.native="isOpen = !isOpen" class="mt-3 text-gray-800 hover:underline sm:mx-3 sm:mt-0" to="/Home">Home</router-link>
                     <router-link @click.native="isOpen = !isOpen" class="mt-3 text-gray-800 hover:underline sm:mx-3 sm:mt-0" to="/Authors">Authors</router-link>
                     <router-link @click.native="isOpen = !isOpen" class="mt-3 text-gray-800 hover:underline sm:mx-3 sm:mt-0" to="/Insert/">Add New Book!</router-link>
                     <router-link @click.native="isOpen = !isOpen" class="mt-3 text-gray-800 hover:underline sm:mx-3 sm:mt-0" to="/News">News About Books!</router-link>
+                    <router-link @click.native="isOpen = !isOpen" class="mt-3 text-gray-800 hover:underline sm:mx-3 sm:mt-0" to="/Insert/">Profile</router-link>
+                </div>
+            </nav>
+        </div>
+         <div v-else class="container mx-auto px-6 py-3">
+            <div class="flex items-center">                  
+                <div class="w-full text-gray-800 md:text-center text-m font-semibold">
+                    Eden's Book Store
+                </div>
+                    <div class="flex sm:hidden">
+                        <button @click="isOpen = !isOpen" type="button" class="text-gray-800-600 hover:text-gray-800-500 focus:outline-none focus:text-gray-800-500" aria-label="toggle menu">
+                            <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
+                                <path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
+                            </svg>
+                        </button>
+                </div>
+            </div>
+            <nav :class="isOpen ? '' : 'hidden'" class="sm:flex sm:justify-center sm:items-center mt-4">
+                <div class="flex flex-col sm:flex-row">
+                    <router-link @click.native="isOpen = !isOpen" class="mt-3 text-gray-800 hover:underline sm:mx-3 sm:mt-0" to="/Login">Login</router-link>
+                    <router-link @click.native="isOpen = !isOpen" class="mt-3 text-gray-800 hover:underline sm:mx-3 sm:mt-0" to="/Login">About</router-link>
+                    <router-link @click.native="isOpen = !isOpen" class="mt-3 text-gray-800 hover:underline sm:mx-3 sm:mt-0" to="/Login">Support</router-link>
+
                 </div>
             </nav>
         </div>
@@ -38,14 +61,22 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 export default {
-    props:['weather'],
-    data(){
-        return{
-            isOpen : false,
-            isClicked : false
-        }
+  props:['weather','isLogged','userEmail'],
+  data(){
+    return{
+        isOpen : false,
+        isClicked : false,
     }
+  },
+  methods:{
+    logOut(){
+      firebase.auth().signOut().then(()=>{
+        this.$router.replace({ name: "Login" });
+      })
+    },
+  }
 }
 </script>
 
