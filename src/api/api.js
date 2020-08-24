@@ -1,7 +1,7 @@
 const API_URL = 'http://localhost:9999/';
 const API_READ_ALL = API_URL+'edenbook/';
 const API_READ_BOOK = API_URL+'edenbook/book/';
-const API_READ_BOOK_NAME = API_URL+'edenbook/fetchbookvianame.php?title=';
+const API_READ_BOOK_NAME = API_URL+'edenbook/fetchbookvianame/';
 const API_INSERT_BOOK = API_URL+'edenbook/insert/';
 const API_DELETE_BOOK = API_URL+'edenbook/delete/';
 const API_UPDATE_BOOK = API_URL+'edenbook/update/';
@@ -11,8 +11,13 @@ const API_ADD_COMMENTS = API_URL+'edenbook/addcomment/';
 const API_NEWS = "https://newsapi.org/v2/everything?q=book&from=2020-08-20&to=2020-08-20&sortBy=popularity&apiKey=eed39cf371d04783aa85d8f258030d56";
 const API_FRESH_NEWS = "https://newsapi.org/v2/top-headlines?country=us&apiKey=eed39cf371d04783aa85d8f258030d56"
 const API_WEATHER = "http://api.openweathermap.org/data/2.5/weather?lang=en&units=metric&zip=6725,hu&appid=53a8a64a78d4bc026804722d8a88eb29";
+const API_QUOTES = 'http://philosophy-quotes-api.glitch.me/quotes';
 
-export default{    
+export default{
+    async fetchQuote(){
+      const res = await fetch(API_QUOTES);
+      return res.json();
+    },
     async fetchNews(){
       const res = await fetch(API_NEWS);
       return res.json();

@@ -5,6 +5,7 @@
       <loader v-show="loader"></loader>
     </transition>
     <alert v-show="alert"></alert>
+    <p class="text-center text-xs text-gray-700"> {{selectedQuote}} - {{selectedQuoteAuthor}}</p>
     <div class="home__search relative max-w-lg mx-auto">
     <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
       <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
@@ -20,55 +21,66 @@
       </div>
     </div>
     </div>
+    <scroller></scroller>
   </div>
 </template>
 
 <script>
 import API from '@/api/api'
 import Loader from '@/components/Loader'
+import Scroller from '@/components/Scroller'
 import SideNote from '@/components/SideNote'
 import Alert from '@/components/Alert'
 import Book from '@/components/Book.vue'
 export default {
-  
-    components:{
-        'side-note' : SideNote,
-        'loader' : Loader,
-        'book' : Book,
-        'alert' : Alert
-    },
-    data(){
-      return{
-        loader : true,
-        'books' : {},
-        'news' : [],
-        'search' :'', //TODO - Implementing an easy search option
-        alert: false
-      }
-    },
-    async mounted(){
-     this.books = await API.fetchBooks();     
-    },
-     created(){
-       setTimeout(() => {
-        this.loader = !this.loader;
-      }, 2000);
-    },
-    methods:{
-        async searchBook(){
-          this.books = await API.fetchBookViaName(this.search);
-        },
-        deleteBook(id){
-        API.deleteBook(id).then(() =>{
-            this.alert = true;
-            setTimeout(() => {
-            this.alert = false;
-            }, 2000);
-            location.reload();
-        });   
-      },
+  components:{
+    'scroller' : Scroller,
+    'side-note' : SideNote,
+    'loader' : Loader,
+    'book' : Book,
+    'alert' : Alert
+  },
+  data(){
+    return{
+      'quote' : [],
+      'selectedQuote' : '',
+      'selectedQuoteAuthor' : '',
+      loader : true,
+      'books' : {},
+      'news' : [],
+      'search' :'', 
+      alert: false
     }
+  },
+  async mounted(){
+    this.books = await API.fetchBooks();     
+  },
+  created(){
+    setTimeout(() => {
+    this.selectedQuote = this.quote[[Math.floor(Math.random() * this.quote.length)]].quote;
+    this.selectedQuoteAuthor = this.quote[[Math.floor(Math.random() * this.quote.length)]].source;
+    this.loader = !this.loader;
+    }, 2000);
+  },
+  async beforeCreate(){
+    console.log("fetching");
+    this.quote = await API.fetchQuote();
+  },
+  methods:{
+      async searchBook(){
+        this.books = await API.fetchBookViaName(this.search);
+      },
+      deleteBook(id){
+        API.deleteBook(id).then(() =>{
+          this.alert = true;
+          setTimeout(() => {
+          this.alert = false;
+          }, 2000);
+          location.reload();
+      });   
+    },
   }
+}
 </script>
 
 <style>
